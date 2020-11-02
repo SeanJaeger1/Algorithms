@@ -1,5 +1,5 @@
 def quicksort(array = [9,8,7,-6,5.2,6,2,7,-8,4,6,3,7,2,9,5,8,0,-4,3,3,2,1]):
-    if len(array) < 1:
+    if len(array) < 2:
         return array
 
     pivotValue, leftArray, equalArray, rightArray = array[len(array) // 2], [], [], []
