@@ -1,13 +1,14 @@
-def bubblesort(array = [4,1,3,5]):
-    arrayLength = len(array)
+def bubble_sort(unsorted_array):
+    array_length = len(unsorted_array)
 
-    for i in range(arrayLength - 1):
+    for i in range(array_length - 1):
+        for j in range(array_length - i - 1):
+            if unsorted_array[j] > unsorted_array[j + 1]:
+                unsorted_array[j +
+                               1], unsorted_array[j] = unsorted_array[j], unsorted_array[j + 1]
 
-        for j in range(arrayLength - 1 - i):
+    return unsorted_array
 
-            if array[j] > array[j + 1]:
-                array[j + 1], array[j] = array[j], array[j + 1]
 
-    return array
-
-print(bubblesort())
+print(bubble_sort([9, 8, 7, -6, 5.2, 6, 2, 7, -8,
+                   4, 6, 3, 7, 2, 9, 5, 8, 0, -4, 3, 3, 2, 1]))
