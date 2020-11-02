@@ -1,3 +1,5 @@
+from collections import deque
+
 graph = {
     "A": ["D", "C"],
     "B": ["F", "G", "E"],
@@ -10,13 +12,13 @@ graph = {
 
 
 def breadth_first_search(starting_node, graph):
-    queue, discovered = [], []
+    queue, discovered = deque([]), []
 
     queue.append(starting_node)
     discovered.append(starting_node)
 
     while queue:
-        s = queue.pop(0)
+        s = queue.popleft()
 
         for neighbour in graph[s]:
             if neighbour not in discovered:
