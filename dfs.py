@@ -19,8 +19,10 @@ def depth_first_search(starting_node, graph):
 
         if current_node not in discovered:
             discovered.append(current_node)
+
             for neighbour in graph[current_node]:
-                queue.append(neighbour)
+                if neighbour not in discovered:
+                    queue.append(neighbour)
 
     return discovered
 
