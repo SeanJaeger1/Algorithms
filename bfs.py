@@ -12,10 +12,7 @@ graph = {
 
 
 def breadth_first_search(starting_node, graph):
-    queue, discovered = deque([]), []
-
-    queue.append(starting_node)
-    discovered.append(starting_node)
+    queue, discovered = deque([starting_node]), [starting_node]
 
     while queue:
         s = queue.popleft()
