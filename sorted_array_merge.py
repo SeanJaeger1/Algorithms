@@ -16,6 +16,3 @@ def sorted_array_merge(first_array, second_array):
         merged_array = merged_array + second_array[second_index:]
 
     return merged_array
-
-
-print(sorted_array_merge([0, 4, 7, 19], [1, 4, 5, 7, 8, 9]))
