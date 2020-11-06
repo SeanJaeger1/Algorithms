@@ -4,7 +4,6 @@ def two_sum(array, sum):
     array_dict = {
         value: None for value in array
     }
-    duplicate_number = sum // 2
 
     for value in array:
         required_pair_value = sum - value
@@ -21,6 +20,8 @@ def two_sum(array, sum):
         # if there's any duplicates, generate the number of duplicate pairs and
         # append these pairs to the pairs array, removing the case where the value
         # matches with itself in the dict
+        duplicate_number = sum // 2
+
         number_of_duplicate_sum_pairs = number_of_duplicates**2 - number_of_duplicates
 
         duplicate_pairs = [
