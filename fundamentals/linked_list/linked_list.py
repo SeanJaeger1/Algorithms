@@ -39,6 +39,18 @@ class LinkedList():
         if self._tail is None:
             self._tail = new_node
 
+    def front(self):
+        if self._head is None:
+            raise IndexError("This list is currently empty")
+        else:
+            return self._head.value
+
+    def back(self):
+        if self._tail is None:
+            raise IndexError("This list is currently empty")
+        else:
+            return self._tail.value
+
     def __repr__(self):
         if self._head is None:
             return "Empty linked list"
