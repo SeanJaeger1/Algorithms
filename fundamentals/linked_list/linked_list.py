@@ -2,12 +2,13 @@ from node import Node
 
 class LinkedList():
     def __init__(self):
-        self._head = None    
-    
-    # adds to the front of the linked list
-    def push(self, value):
+        self._head = None
+        self._tail = None
+
+    def push_front(self, value):
         if self._head is None:
-            self._head = Node(value)
+            inital_node = Node(value)
+            self._head, self._tail = inital_node, inital_node
         else:
             new_node = Node(value, next_node=self._head)
             self._head = new_node
@@ -16,11 +17,21 @@ class LinkedList():
         if self._head is None:
             return "Empty linked list"
 
-        current = self._head
+        current_node = self._head
         output = str(self._head.value)
 
-        while current.next_node:
-            output = output + " -> " + current.value
-            current = current.next_node
+        while current_node.next_node:
+            output = output + " -> " + current_node.value
+            current_node = current_node.next_node
 
         return output
+
+    def size(self):
+        length = 0
+        current_node = self._head
+
+        while current_node:
+            length = length + 1
+            current_node = current_node.next_node
+
+        return length
