@@ -17,6 +17,5 @@ example_list.push_front(7)
 print(example_list)
 example_list.reverse()
 print(example_list)
-print(example_list.value_at(1))
 
 current_status(example_list)

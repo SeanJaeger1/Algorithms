@@ -32,19 +32,19 @@ class LinkedList():
                 self._head = None
             return pop_value
 
-    # def pop_back(self):
-    #     if self._head is None or self._tail is None:
-    #         raise Exception("This list has to end value to remove")
-    #     else:
-    #         previous_node = None
-    #         current_node = self._head
+    def pop_back(self):
+        if self._head is None or self._tail is None:
+            raise Exception("This list has to end value to remove")
+        else if self._head is self._tail:
+            self._head, self._tail = None, None
+        else:
+            current_node = self._head
 
-    #         while current_node.get_next_node() is not None:
-    #             previous_node = current_node
-    #             current_node = current_node.get_next_node()
+            while current_node.get_next_node() is not self._tail:
+                current_node = current_node.get_next_node()
 
-    #         self._tail = previous_node
-    #         self._tail.get_next_node() = None
+            self._tail = current_node
+            self._tail.set_next_node(None)
 
     def push_front(self, value):
         new_node = Node(value, self._head)
@@ -89,6 +89,8 @@ class LinkedList():
 
         previous_node = None
         current_node = self._head
+
+        self._tail = self._head
 
         while(current_node is not None):
             next_node = current_node.get_next_node()
