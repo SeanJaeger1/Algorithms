@@ -51,6 +51,26 @@ class LinkedList():
         else:
             return self._tail.value
 
+    # def value_at(self, index):
+    #     node_count = 0
+    #     selected_node = self._head
+    #     while node_count !== index:
+    #         selected_node = 
+
+    def reverse(self):
+        if len(self) < 2:
+            return
+
+        previous_node = None
+        current_node = self._head
+
+        while(current_node is not None):
+            next_node = current_node.next_node
+            current_node.next_node = previous_node
+            previous_node = current_node
+            current_node = next_node
+            self._head = previous_node
+
     def __repr__(self):
         if self._head is None:
             return "Empty linked list"
