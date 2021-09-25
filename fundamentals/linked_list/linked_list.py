@@ -51,12 +51,24 @@ class LinkedList():
         else:
             return self._tail.value
 
-    # def value_at(self, index):
-    #     node_count = 0
-    #     selected_node = self._head
-    #     while node_count !== index:
-    #         selected_node = 
+    def value_at(self, index):
+        node_count = 0
+        return_value = None
+        selected_node = self._head
 
+        while selected_node is not None:
+            if node_count == index:
+                return_value = selected_node.value
+                break
+
+            selected_node = selected_node.next_node
+            node_count = node_count + 1
+
+        if return_value:
+            return return_value
+        else:
+            raise IndexError("There is no node at this index")
+        
     def reverse(self):
         if len(self) < 2:
             return
