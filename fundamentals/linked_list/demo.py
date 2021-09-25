@@ -1,6 +1,11 @@
 from linked_list import LinkedList
 
 
+def current_status(current_list):
+    print("current list: {0}".format(current_list))
+    print("head node is: {0}, tail node is: {1}".format(current_list._head.get_value(), current_list._tail.get_value()))
+
+
 example_list = LinkedList()
 
 print(example_list)
@@ -12,4 +17,6 @@ example_list.push_front(7)
 print(example_list)
 example_list.reverse()
 print(example_list)
-print(example_list.value_at(8))
+print(example_list.value_at(1))
+
+current_status(example_list)

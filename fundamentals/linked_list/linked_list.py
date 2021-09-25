@@ -18,19 +18,33 @@ class LinkedList():
             self._head, self._tail = inital_node, inital_node
         else:
             new_node = Node(value)
-            self._tail.next_node = new_node
+            self._tail.set_next_node(new_node)
             self._tail = new_node
 
     def pop_front(self):
         if self._head is None:
-            raise IndexError("This list is currently empty")
+            raise Exception("This list has no front value to remove")
         else:
-            pop_value = self._head.value
-            if self._head.next_node:
-                self._head = self._head.next_node
+            pop_value = self._head.get_value()
+            if self._head.get_next_node():
+                self._head = self._head.get_next_node()
             else:
                 self._head = None
             return pop_value
+
+    # def pop_back(self):
+    #     if self._head is None or self._tail is None:
+    #         raise Exception("This list has to end value to remove")
+    #     else:
+    #         previous_node = None
+    #         current_node = self._head
+
+    #         while current_node.get_next_node() is not None:
+    #             previous_node = current_node
+    #             current_node = current_node.get_next_node()
+
+    #         self._tail = previous_node
+    #         self._tail.get_next_node() = None
 
     def push_front(self, value):
         new_node = Node(value, self._head)
@@ -43,13 +57,13 @@ class LinkedList():
         if self._head is None:
             raise IndexError("This list is currently empty")
         else:
-            return self._head.value
+            return self._head.get_value()
 
     def back(self):
         if self._tail is None:
             raise IndexError("This list is currently empty")
         else:
-            return self._tail.value
+            return self._tail.get_value()
 
     def value_at(self, index):
         node_count = 0
@@ -58,10 +72,10 @@ class LinkedList():
 
         while selected_node is not None:
             if node_count == index:
-                return_value = selected_node.value
+                return_value = selected_node.get_value()
                 break
 
-            selected_node = selected_node.next_node
+            selected_node = selected_node.get_next_node()
             node_count = node_count + 1
 
         if return_value:
@@ -77,8 +91,8 @@ class LinkedList():
         current_node = self._head
 
         while(current_node is not None):
-            next_node = current_node.next_node
-            current_node.next_node = previous_node
+            next_node = current_node.get_next_node()
+            current_node.set_next_node(previous_node)
             previous_node = current_node
             current_node = next_node
             self._head = previous_node
@@ -87,12 +101,12 @@ class LinkedList():
         if self._head is None:
             return "Empty linked list"
 
-        current_node = self._head.next_node
-        output = str(self._head.value)
+        current_node = self._head.get_next_node()
+        output = str(self._head.get_value())
 
         while current_node:
-            output = output + " -> " + str(current_node.value)
-            current_node = current_node.next_node
+            output = output + " -> " + str(current_node.get_value())
+            current_node = current_node.get_next_node()
 
         return output
 
@@ -102,6 +116,6 @@ class LinkedList():
 
         while current_node:
             length = length + 1
-            current_node = current_node.next_node
+            current_node = current_node.get_next_node()
 
         return length
