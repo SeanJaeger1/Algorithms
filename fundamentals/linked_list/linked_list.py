@@ -123,6 +123,32 @@ class LinkedList():
             current_node = next_node
             self._head = previous_node
 
+    def erase(self, index):
+        if index == 0:
+            self.pop_front()
+            return
+
+        node_count = 0
+        previous_node = self._head
+
+        while previous_node is not None and previous_node.get_next_node() is not None:
+            if node_count == index - 1:
+                node_to_remove = previous_node.get_next_node()
+                node_to_replace_with = node_to_remove.get_next_node()
+                if node_to_replace_with is None:
+                    # if there's no node after the one being removed
+                    # cut the list off right before the value being removed
+                    previous_node.set_next_node(None)
+                    self._tail = previous_node
+                else:
+                    previous_node.set_next_node(node_to_replace_with)
+                return
+            
+            previous_node = previous_node.get_next_node()
+            node_count = node_count + 1
+
+        raise IndexError("There is no node of this index in the list")
+
     def __repr__(self):
         if self._head is None:
             return "Empty linked list"
