@@ -8,9 +8,9 @@ class LinkedList():
 
     def is_empty(self):
         if self._head is None:
-            return true
+            return True
         else:
-            return false
+            return False
 
     def push_back(self, value):
         if self._head is None:
@@ -35,7 +35,7 @@ class LinkedList():
     def pop_back(self):
         if self._head is None or self._tail is None:
             raise Exception("This list has to end value to remove")
-        else if self._head is self._tail:
+        elif self._head is self._tail:
             self._head, self._tail = None, None
         else:
             current_node = self._head
