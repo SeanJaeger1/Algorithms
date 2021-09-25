@@ -149,6 +149,37 @@ class LinkedList():
 
         raise IndexError("There is no node of this index in the list")
 
+    def remove_value(self, value):
+        previous_node = None
+        current_node = self._head
+
+        while current_node is not None:
+            if value == current_node.get_value():
+                if current_node is self._head:
+                    if self._head.get_next_node() is not None:
+                        self._head = self._head.get_next_node()
+                    else:
+                        self.head_, self._tail = None, None
+                    
+                    return
+
+                node_to_replace_with = current_node.get_next_node()
+
+                if node_to_replace_with is None:
+                    # if there's no node after the one being removed
+                    # cut the list off right before the value being removed
+                    previous_node.set_next_node(None)
+                    self._tail = previous_node
+                else:
+                    previous_node.set_next_node(node_to_replace_with)
+
+                return
+            else:            
+                previous_node = current_node
+                current_node = current_node.get_next_node()
+
+        raise Exception("There is no matching value in this list to remove")
+
     def __repr__(self):
         if self._head is None:
             return "Empty linked list"
