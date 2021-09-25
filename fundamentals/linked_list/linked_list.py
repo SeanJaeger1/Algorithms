@@ -83,6 +83,30 @@ class LinkedList():
         else:
             raise IndexError("There is no node at this index")
         
+    def insert(self, index, value):
+        if index == 0:
+            self.push_front(value)
+            return
+
+        node_count = 0
+        selected_node = self._head
+
+        while selected_node is not None:
+            if node_count == index - 1:
+
+                node_to_insert = Node(value, selected_node.get_next_node())
+                selected_node.set_next_node(node_to_insert)
+
+                if selected_node == self._tail:
+                    self._tail = node_to_insert
+                
+                return
+
+            selected_node = selected_node.get_next_node()
+            node_count = node_count + 1
+
+        raise IndexError("There is no node at this index")
+
     def reverse(self):
         if len(self) < 2:
             return
