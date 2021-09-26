@@ -149,6 +149,32 @@ class LinkedList():
 
         raise IndexError("There is no node of this index in the list")
 
+    def value_n_from_end(self, index):
+        current_node = self._head
+        trailing_node = None
+        tail_distance_count = 0
+        
+        while current_node is not None:
+            # update tail node for new current node before checking
+            if tail_distance_count == index:
+                if trailing_node is None:
+                    trailing_node = self._head
+                else:
+                    trailing_node = trailing_node.get_next_node()
+            else:
+                tail_distance_count = tail_distance_count + 1
+
+            # if you're on the tail node, and the trailing node is None
+            # it's an error, otherwise return that node's value
+            if current_node is self._tail:
+                if trailing_node is None:
+                    return IndexError("No node exists at this distance from the end")
+                else:
+                    return trailing_node.get_value()
+            
+            # move onto next node and repeat
+            current_node = current_node.get_next_node()
+
     def remove_value(self, value):
         previous_node = None
         current_node = self._head
