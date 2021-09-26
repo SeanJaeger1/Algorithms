@@ -6,11 +6,41 @@ class LinkedList:
         self._head = None
         self._tail = None
 
+    def __len__(self):
+        length = 0
+        current_node = self._head
+
+        while current_node:
+            length = length + 1
+            current_node = current_node.get_next_node()
+
+        return length
+
+    def __repr__(self):
+        if self._head is None:
+            return "Empty linked list"
+
+        current_node = self._head.get_next_node()
+        output = str(self._head.get_value())
+
+        while current_node:
+            output = output + " -> " + str(current_node.get_value())
+            current_node = current_node.get_next_node()
+
+        return output
+
     def is_empty(self):
         if self._head is None:
             return True
         else:
             return False
+
+    def push_front(self, value):
+        new_node = Node(value, self._head)
+        self._head = new_node
+
+        if self._tail is None:
+            self._tail = new_node
 
     def push_back(self, value):
         if self._head is None:
@@ -24,16 +54,16 @@ class LinkedList:
     def pop_front(self):
         if self._head is None:
             raise Exception("This list has no front value to remove")
+        elif self._head is self._tail:
+            self._head, self._tail = None, None
         else:
             pop_value = self._head.get_value()
-            if self._head.get_next_node():
-                self._head = self._head.get_next_node()
-            else:
-                self._head = None
+            self._head = self._head.get_next_node()
+
             return pop_value
 
     def pop_back(self):
-        if self._head is None or self._tail is None:
+        if self._tail is None:
             raise Exception("This list has to end value to remove")
         elif self._head is self._tail:
             self._head, self._tail = None, None
@@ -46,22 +76,15 @@ class LinkedList:
             self._tail = current_node
             self._tail.set_next_node(None)
 
-    def push_front(self, value):
-        new_node = Node(value, self._head)
-        self._head = new_node
-
-        if self._tail is None:
-            self._tail = new_node
-
     def front(self):
         if self._head is None:
-            raise IndexError("This list is currently empty")
+            raise Exception("This list is currently empty")
         else:
             return self._head.get_value()
 
     def back(self):
         if self._tail is None:
-            raise IndexError("This list is currently empty")
+            raise Exception("This list is currently empty")
         else:
             return self._tail.get_value()
 
@@ -205,26 +228,3 @@ class LinkedList:
                 current_node = current_node.get_next_node()
 
         raise Exception("There is no matching value in this list to remove")
-
-    def __repr__(self):
-        if self._head is None:
-            return "Empty linked list"
-
-        current_node = self._head.get_next_node()
-        output = str(self._head.get_value())
-
-        while current_node:
-            output = output + " -> " + str(current_node.get_value())
-            current_node = current_node.get_next_node()
-
-        return output
-
-    def __len__(self):
-        length = 0
-        current_node = self._head
-
-        while current_node:
-            length = length + 1
-            current_node = current_node.get_next_node()
-
-        return length
