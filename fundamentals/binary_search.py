@@ -19,7 +19,7 @@ def binary_search(value, array):
     elif array[pivot_index] == value:
         return pivot_index
     else:
-        recursion_result = binary_search(value, array[pivot_index + 1:])
+        recursion_result = binary_search(value, array[pivot_index + 1 :])
         if recursion_result == -1:
             return -1
         else:

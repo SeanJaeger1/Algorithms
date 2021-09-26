@@ -4,7 +4,7 @@ graph = {
     "A": {"B": 3, "C": 8},
     "B": {"A": 3, "C": 4, "D": 12},
     "C": {"A": 8, "B": 4},
-    "D": {"B": 12}
+    "D": {"B": 12},
 }
 
 
@@ -32,8 +32,7 @@ def prims_mst(graph):
 
         for destination, distance in graph[end].items():
             if destination not in discovered_vertices:
-                heappush(edges_to_investigate,
-                         (distance, end, destination))
+                heappush(edges_to_investigate, (distance, end, destination))
 
     return mst
 

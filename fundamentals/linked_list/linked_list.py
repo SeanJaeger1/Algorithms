@@ -1,7 +1,7 @@
 from node import Node
 
 
-class LinkedList():
+class LinkedList:
     def __init__(self):
         self._head = None
         self._tail = None
@@ -82,7 +82,7 @@ class LinkedList():
             return return_value
         else:
             raise IndexError("There is no node at this index")
-        
+
     def insert(self, index, value):
         if index == 0:
             self.push_front(value)
@@ -99,7 +99,7 @@ class LinkedList():
 
                 if selected_node == self._tail:
                     self._tail = node_to_insert
-                
+
                 return
 
             selected_node = selected_node.get_next_node()
@@ -116,7 +116,7 @@ class LinkedList():
 
         self._tail = self._head
 
-        while(current_node is not None):
+        while current_node is not None:
             next_node = current_node.get_next_node()
             current_node.set_next_node(previous_node)
             previous_node = current_node
@@ -143,7 +143,7 @@ class LinkedList():
                 else:
                     previous_node.set_next_node(node_to_replace_with)
                 return
-            
+
             previous_node = previous_node.get_next_node()
             node_count = node_count + 1
 
@@ -153,7 +153,7 @@ class LinkedList():
         current_node = self._head
         trailing_node = None
         tail_distance_count = 0
-        
+
         while current_node is not None:
             # update tail node for new current node before checking
             if tail_distance_count == index:
@@ -171,7 +171,7 @@ class LinkedList():
                     return IndexError("No node exists at this distance from the end")
                 else:
                     return trailing_node.get_value()
-            
+
             # move onto next node and repeat
             current_node = current_node.get_next_node()
 
@@ -186,7 +186,7 @@ class LinkedList():
                         self._head = self._head.get_next_node()
                     else:
                         self.head_, self._tail = None, None
-                    
+
                     return
 
                 node_to_replace_with = current_node.get_next_node()
@@ -200,7 +200,7 @@ class LinkedList():
                     previous_node.set_next_node(node_to_replace_with)
 
                 return
-            else:            
+            else:
                 previous_node = current_node
                 current_node = current_node.get_next_node()
 

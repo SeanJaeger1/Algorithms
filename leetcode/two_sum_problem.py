@@ -1,9 +1,7 @@
 def two_sum(array, sum):
     pairs = []
     number_of_duplicates = 0
-    array_dict = {
-        value: None for value in array
-    }
+    array_dict = {value: None for value in array}
 
     for value in array:
         required_pair_value = sum - value
@@ -12,9 +10,7 @@ def two_sum(array, sum):
             if value == required_pair_value:
                 number_of_duplicates += 1
             else:
-                pairs.append("{0} and {1} is a pair".format(
-                    value, required_pair_value
-                ))
+                pairs.append("{0} and {1} is a pair".format(value, required_pair_value))
 
     if number_of_duplicates > 0:
         # if there's any duplicates, generate the number of duplicate pairs and
@@ -22,12 +18,11 @@ def two_sum(array, sum):
         # matches with itself in the dict
         duplicate_number = sum // 2
 
-        number_of_duplicate_sum_pairs = number_of_duplicates**2 - number_of_duplicates
+        number_of_duplicate_sum_pairs = number_of_duplicates ** 2 - number_of_duplicates
 
         duplicate_pairs = [
-            "{0} and {0} is a pair".format(
-                duplicate_number
-            ) for i in range(number_of_duplicate_sum_pairs)
+            "{0} and {0} is a pair".format(duplicate_number)
+            for i in range(number_of_duplicate_sum_pairs)
         ]
 
         pairs += duplicate_pairs
