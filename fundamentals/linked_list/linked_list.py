@@ -55,7 +55,10 @@ class LinkedList:
         if self._head is None:
             raise Exception("This list has no front value to remove")
         elif self._head is self._tail:
+            pop_value = self._head
             self._head, self._tail = None, None
+
+            return pop_value
         else:
             pop_value = self._head.get_value()
             self._head = self._head.get_next_node()
@@ -66,15 +69,20 @@ class LinkedList:
         if self._tail is None:
             raise Exception("This list has to end value to remove")
         elif self._head is self._tail:
+            pop_value = self._head
             self._head, self._tail = None, None
+            return pop_value
         else:
             current_node = self._head
 
             while current_node.get_next_node() is not self._tail:
                 current_node = current_node.get_next_node()
 
+            pop_value = self._tail
             self._tail = current_node
             self._tail.set_next_node(None)
+
+            return pop_value
 
     def front(self):
         if self._head is None:
