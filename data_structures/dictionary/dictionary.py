@@ -57,7 +57,10 @@ class Dictionary:
         return None
 
     def remove(self, key):
-        pass
+        for index, item in enumerate(self.table[self._hash_to_index(key)]):
+            if item[0] == key:
+                self.table[self._hash_to_index(key)].pop(index)
+                return
 
 
 k = Dictionary()
