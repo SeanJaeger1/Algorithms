@@ -41,7 +41,7 @@ class Dictionary:
         return position
 
     def exists(self, key):
-        
+        pass
 
     def get(self, key):
         pass
