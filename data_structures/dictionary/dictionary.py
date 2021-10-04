@@ -8,7 +8,6 @@ class Dictionary:
         self.item_count = 0
         self.max_load = 0.4
         self.table = [[] for bucket in range(self.bucket_count)]
-        pass
 
     def __repr__(self):
         return str(self.table)
@@ -30,9 +29,12 @@ class Dictionary:
         if self.item_count > self.bucket_count * self.max_load:
             self._resize()
 
-        self.table[self._hash_to_index(new_item)].append(new_item)
+        for item in self.table[self._hash_to_index(new_item)]:
+            if item[0] == key:
+                item[1] = value
+                return
 
-        # account for duplicate items
+        self.table[self._hash_to_index(new_item)].append(new_item)
 
     def _hash_to_index(self, pair):
         position = math.floor(
@@ -53,6 +55,8 @@ class Dictionary:
 k = Dictionary()
 
 print(k)
-for i in range(20):
+for i in range(25):
     k.add("item-#{0}".format(i), i ** 2)
+print(k)
+k.add("item-#19", 5000)
 print(k)
