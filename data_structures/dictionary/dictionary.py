@@ -18,7 +18,7 @@ class Dictionary:
 
         for bucket in self.table:
             for item in bucket:
-                new_table[self._hash_to_index(item)].append(item)
+                new_table[self._hash_to_index(item[0])].append(item)
 
         self.table = new_table
 
@@ -29,16 +29,16 @@ class Dictionary:
         if self.item_count > self.bucket_count * self.max_load:
             self._resize()
 
-        for item in self.table[self._hash_to_index(new_item)]:
+        for item in self.table[self._hash_to_index(key)]:
             if item[0] == key:
                 item[1] = value
                 return
 
-        self.table[self._hash_to_index(new_item)].append(new_item)
+        self.table[self._hash_to_index(key)].append(new_item)
 
-    def _hash_to_index(self, pair):
+    def _hash_to_index(self, key):
         position = math.floor(
-            self.bucket_count * abs(hash(pair[0])) / 2 ** (sys.hash_info.width - 1)
+            self.bucket_count * abs(hash(key)) / 2 ** (sys.hash_info.width - 1)
         )
         return position
 
@@ -46,7 +46,7 @@ class Dictionary:
         pass
 
     def get(self, key):
-        for item in self.table[self._hash_to_index([key])]:
+        for item in self.table[self._hash_to_index(key)]:
             if item[0] == key:
                 return item[1]
         
@@ -64,3 +64,4 @@ for i in range(25):
 print(k)
 k.add("item-#19", 5000)
 print(k)
+print(k.get("item-#19"))
