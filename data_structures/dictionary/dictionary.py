@@ -43,7 +43,11 @@ class Dictionary:
         return position
 
     def exists(self, key):
-        pass
+        for item in self.table[self._hash_to_index(key)]:
+            if item[0] == key:
+                return True
+        
+        return False
 
     def get(self, key):
         for item in self.table[self._hash_to_index(key)]:
