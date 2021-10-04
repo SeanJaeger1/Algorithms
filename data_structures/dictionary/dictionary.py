@@ -6,15 +6,15 @@ class Dictionary:
     def __init__(self):
         self.bucket_count = 7
         self.item_count = 0
-        self.max_load = 0.4
+        self.max_load = 0.75
         self.table = [[] for bucket in range(self.bucket_count)]
 
     def __repr__(self):
         return str(self.table)
 
     def _resize(self):
-        new_table = [[] for bucket in range(self.bucket_count * 2)]
         self.bucket_count = self.bucket_count * 2
+        new_table = [[] for bucket in range(self.bucket_count)]
 
         for bucket in self.table:
             for item in bucket:
@@ -23,9 +23,6 @@ class Dictionary:
         self.table = new_table
 
     def add(self, key, value):
-        new_item = [key, value]
-        self.item_count = self.item_count + 1
-
         if self.item_count > self.bucket_count * self.max_load:
             self._resize()
 
@@ -34,7 +31,8 @@ class Dictionary:
                 item[1] = value
                 return
 
-        self.table[self._hash_to_index(key)].append(new_item)
+        self.table[self._hash_to_index(key)].append([key, value])
+        self.item_count = self.item_count + 1
 
     def _hash_to_index(self, key):
         position = math.floor(
