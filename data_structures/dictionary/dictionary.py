@@ -46,29 +46,19 @@ class Dictionary:
         for item in self.table[self._hash_to_index(key)]:
             if item[0] == key:
                 return True
-        
+
         return False
 
     def get(self, key):
         for item in self.table[self._hash_to_index(key)]:
             if item[0] == key:
                 return item[1]
-        
+
         return None
 
     def remove(self, key):
         for index, item in enumerate(self.table[self._hash_to_index(key)]):
             if item[0] == key:
                 self.table[self._hash_to_index(key)].pop(index)
+                self.item_count = self.item_count - 1
                 return
-
-
-k = Dictionary()
-
-print(k)
-for i in range(25):
-    k.add("item-#{0}".format(i), i ** 2)
-print(k)
-k.add("item-#19", 5000)
-print(k)
-print(k.get("item-#19"))
