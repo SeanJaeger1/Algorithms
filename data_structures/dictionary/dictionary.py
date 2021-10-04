@@ -46,7 +46,11 @@ class Dictionary:
         pass
 
     def get(self, key):
-        pass
+        for item in self.table[self._hash_to_index([key])]:
+            if item[0] == key:
+                return item[1]
+        
+        return None
 
     def remove(self, key):
         pass
