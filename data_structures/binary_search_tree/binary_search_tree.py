@@ -9,8 +9,37 @@ class BinarySearchTree:
         pass
 
     def insert(self, value):
-        # need a subfunction to get the specific value's parent
-        pass
+        if self.root_node.value is None:
+            self.root_node.value = value
+            return
+        elif self.root_node.value == value:
+            return
+
+        current_node = self.root_node
+        # you now have a starting node that is not none or equal to insertion value
+
+        inserted = False
+
+        while inserted is False:
+            # smaller case
+            if current_node.value > value:
+                if current_node.left_node is None:
+                    current_node.left_node = BinarySearchTreeNode(value)
+                    inserted = True
+                elif current_node.left_node.value == value:
+                    inserted = True
+
+                current_node = current_node.left_node
+
+            # larger case
+            else:
+                if current_node.right_node is None:
+                    current_node.right_node = BinarySearchTreeNode(value)
+                    inserted = True
+                elif current_node.right_node.value == value:
+                    inserted = True
+
+                current_node = current_node.right_node
 
     def delete_tree(self):
         self.root_node = BinarySearchTreeNode()
