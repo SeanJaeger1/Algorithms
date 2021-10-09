@@ -63,3 +63,12 @@ class BinarySearchTree:
             current_node = current_node.right_node
 
         return maximum
+
+    def get_node_count(self):
+        def count_nodes(node):
+            if node is None:
+                return 0
+            else:
+                return count_nodes(node.left_node) + 1 + count_nodes(node.right_node)
+
+        return count_nodes(self.root_node)
