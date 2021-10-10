@@ -100,3 +100,23 @@ class BinarySearchTree:
                 return count_nodes(node.left_node) + 1 + count_nodes(node.right_node)
 
         return count_nodes(self.root_node)
+
+    def get_height(self):
+        # This will count the maximum number of edges between any leaf node and the root node
+
+        def get_node_height(node):
+            # handle leaf node cases
+            if node is None:
+                return 0
+            elif node.left_node is None and node.right_node is None:
+                return 0
+            else:
+                return (
+                    max(
+                        get_node_height(node.left_node),
+                        get_node_height(node.right_node),
+                    )
+                    + 1
+                )
+
+        return get_node_height(self.root_node)

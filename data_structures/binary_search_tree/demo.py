@@ -5,7 +5,7 @@ from binary_search_tree import BinarySearchTree
 
 example_tree = BinarySearchTree()
 
-to_insert = [i for i in range(10000)]
+to_insert = [i for i in range(20000)]
 random.shuffle(to_insert)
 
 for value in to_insert:
@@ -14,3 +14,4 @@ for value in to_insert:
 print(example_tree.get_node_count())
 print(example_tree.get_max())
 print(example_tree.get_min())
+print(example_tree.get_height())
