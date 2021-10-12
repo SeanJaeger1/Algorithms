@@ -6,7 +6,7 @@ class BinarySearchTree:
         self.root_node = BinarySearchTreeNode()
 
     def __repr__(self):
-        pass
+        return self.print_values()
 
     def insert(self, value):
         if self.root_node.value is None:
@@ -120,3 +120,18 @@ class BinarySearchTree:
                 )
 
         return get_node_height(self.root_node)
+
+    def print_values(self):
+        def print_tree(node):
+            if node is None:
+                return []
+            elif node.left_node is None:
+                return [node.value] + print_tree(node.right_node)
+            else:
+                return (
+                    print_tree(node.left_node)
+                    + [node.value]
+                    + print_tree(node.right_node)
+                )
+
+        return print_tree(self.root_node)
