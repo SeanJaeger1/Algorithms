@@ -61,7 +61,7 @@ class BinarySearchTree:
                 current_node = current_node.left_node
 
             # larger case
-            if current_node.value < value:
+            elif current_node.value < value:
                 if current_node.right_node is None:
                     return False
                 elif current_node.right_node.value == value:
@@ -72,9 +72,12 @@ class BinarySearchTree:
     def delete_tree(self):
         self.root_node = BinarySearchTreeNode()
 
-    def get_min(self, node=self.root_node):
-        minimum = node.value
-        current_node = node.left_node
+    def get_min(self, tree_head=None):
+        if tree_head is None:
+            tree_head = self.root_node
+
+        minimum = tree_head.value
+        current_node = tree_head.left_node
 
         while current_node is not None:
             minimum = current_node.value
@@ -82,9 +85,12 @@ class BinarySearchTree:
 
         return minimum
 
-    def get_max(self, node=self.root_node):
-        maximum = self.root_node.value
-        current_node = self.root_node.right_node
+    def get_max(self, tree_head=None):
+        if tree_head is None:
+            tree_head = self.root_node
+
+        maximum = tree_head.value
+        current_node = tree_head.right_node
 
         while current_node is not None:
             maximum = current_node.value

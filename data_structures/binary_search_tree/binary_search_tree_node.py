@@ -6,5 +6,7 @@ class BinarySearchTreeNode:
 
     def __repr__(self):
         return "Node value is {0}, left node is: {1}, right node is: {2}".format(
-            self.value, self.left_node, self.right_node
+            self.value,
+            self.left_node.value if self.left_node is not None else None,
+            self.right_node.value if self.right_node is not None else None,
         )
