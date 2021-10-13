@@ -15,3 +15,6 @@ print(example_tree.get_node_count())
 print(example_tree.get_max())
 print(example_tree.get_min())
 print(example_tree.get_height())
+print(example_tree.is_binary_search_tree())
+example_tree.root_node.left_node.left_node.value = 700000
+print(example_tree.is_binary_search_tree())

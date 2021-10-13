@@ -1,3 +1,5 @@
+import math
+
 from binary_search_tree_node import BinarySearchTreeNode
 
 
@@ -141,3 +143,16 @@ class BinarySearchTree:
                 )
 
         return print_tree(self.root_node)
+
+    def _is_BST_util(self, node, minimum_value=-math.inf, maximum_value=math.inf):
+        if node is None:
+            return True
+
+        return (
+            minimum_value < node.value < maximum_value
+            and self._is_BST_util(node.left_node, minimum_value, node.value)
+            and self._is_BST_util(node.right_node, node.value, maximum_value)
+        )
+
+    def is_binary_search_tree(self):
+        return self._is_BST_util(self.root_node)
