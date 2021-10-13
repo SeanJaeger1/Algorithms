@@ -61,7 +61,7 @@ class BinarySearchTree:
                 if current_node.left_node is None:
                     return None
                 elif current_node.left_node.value == value:
-                    return current_node
+                    return current_node.left_node
 
                 current_node = current_node.left_node
 
@@ -70,7 +70,7 @@ class BinarySearchTree:
                 if current_node.right_node is None:
                     return None
                 elif current_node.right_node.value == value:
-                    return current_node
+                    return current_node.right_node
 
                 current_node = current_node.right_node
 
