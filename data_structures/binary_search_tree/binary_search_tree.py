@@ -8,7 +8,7 @@ class BinarySearchTree:
         self.root_node = BinarySearchTreeNode()
 
     def __repr__(self):
-        return self.print_values()
+        return str(self.print_values())
 
     def insert(self, value):
         if self.root_node.value is None:
@@ -26,7 +26,7 @@ class BinarySearchTree:
             # smaller case
             if current_node.value > value:
                 if current_node.left_node is None:
-                    current_node.left_node = BinarySearchTreeNode(value)
+                    current_node.left_node = BinarySearchTreeNode(value, current_node)
                     inserted = True
                 elif current_node.left_node.value == value:
                     inserted = True
@@ -36,7 +36,7 @@ class BinarySearchTree:
             # larger case
             else:
                 if current_node.right_node is None:
-                    current_node.right_node = BinarySearchTreeNode(value)
+                    current_node.right_node = BinarySearchTreeNode(value, current_node)
                     inserted = True
                 elif current_node.right_node.value == value:
                     inserted = True
@@ -44,10 +44,13 @@ class BinarySearchTree:
                 current_node = current_node.right_node
 
     def is_in_tree(self, value):
+        return True if self.get_node(value) is not None else False
+
+    def get_node(self, value):
         if self.root_node.value is None:
-            return False
+            return None
         elif self.root_node.value == value:
-            return True
+            return self.root_node
 
         current_node = self.root_node
         # you now have a starting node to iterate over searching
@@ -56,18 +59,18 @@ class BinarySearchTree:
             # smaller case
             if current_node.value > value:
                 if current_node.left_node is None:
-                    return False
+                    return None
                 elif current_node.left_node.value == value:
-                    return True
+                    return current_node
 
                 current_node = current_node.left_node
 
             # larger case
             elif current_node.value < value:
                 if current_node.right_node is None:
-                    return False
+                    return None
                 elif current_node.right_node.value == value:
-                    return True
+                    return current_node
 
                 current_node = current_node.right_node
 
@@ -156,3 +159,23 @@ class BinarySearchTree:
 
     def is_binary_search_tree(self):
         return self._is_BST_util(self.root_node)
+
+    # def delete_value(self, value):
+    #     target_node = self.get_node(value)
+
+    #     if target_node is self.root_node:
+    #         self.root_node.value = None
+
+    #     target_node_parent = target_node.parent
+
+    #     if target_node.left_node is None and target_node.right_node is None:
+    #         # Node is a leaf, can be safely deleted
+    #         if value > target_node_parent.value:
+    #             target_node_parent.right_node = None
+    #         else:
+    #             target_node_parent.left_node = None
+    #     elif target_node.left_node is not None and target_node.right_node is not None:
+    #         # has both children case
+    #         pass
+    #     else:
+    #         is_smaller = value < target_node_parent.value
