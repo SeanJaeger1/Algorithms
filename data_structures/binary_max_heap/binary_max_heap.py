@@ -31,7 +31,21 @@ class BinaryMaxHeap:
             sift_index = self._parent(sift_index)
 
     def _sift_down(self, index):
-        pass
+        max_index = index
+        l = self._left_child(index)
+        r = self._right_child(index)
+
+        if l <= self._size and self._heap[l] > self._heap[max_index]:
+            max_index = l
+        if r <= self._size and self._heap[r] > self._heap[max_index]:
+            max_index = r
+
+        if index != max_index:
+            self._heap[index], self._heap[max_index] = (
+                self._heap[max_index],
+                self._heap[index],
+            )
+            self._sift_down(max_index)
 
     def remove(self, index):
         self._heap[index] = math.inf
