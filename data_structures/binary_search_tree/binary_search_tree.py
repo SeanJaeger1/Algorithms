@@ -160,22 +160,82 @@ class BinarySearchTree:
     def is_binary_search_tree(self):
         return self._is_BST_util(self.root_node)
 
-    # def delete_value(self, value):
-    #     target_node = self.get_node(value)
+    def delete_value(self, value):
+        target_node = self.get_node(value)
 
-    #     if target_node is self.root_node:
-    #         self.root_node.value = None
+        if target_node is None:
+            # No node to delete
+            return
 
-    #     target_node_parent = target_node.parent
+        if target_node.left_node is None and target_node.right_node is None:
+            # Node is root, set value to None so root still exists
+            if target_node is self.root_node:
+                self.root_node.value = None
+                return
 
-    #     if target_node.left_node is None and target_node.right_node is None:
-    #         # Node is a leaf, can be safely deleted
-    #         if value > target_node_parent.value:
-    #             target_node_parent.right_node = None
+            # Node is a non-root leaf, can be safely deleted
+            if target_node is target_node.parent.right_node:
+                target_node.parent.right_node = None
+            else:
+                target_node.parent.left_node = None
+
+        elif target_node.left_node is not None and target_node.right_node is not None:
+            # has both children case
+            # get the right node tree's minimum value, delete that node and set target node to that
+            min_value = self.get_min(target_node.right_node)
+            min_node = self.get_node(min_value)
+            self.delete_value(min_value)
+            target_node.value = min_value
+
+        else:
+            # replace the target node with it's single child
+            # should refactor
+            if target_node is self.root_node:
+                self.root_node = (
+                    target_node.left_node
+                    if target_node.left_node is not None
+                    else target_node.right_node
+                )
+                self.root_node.parent = None
+            elif target_node is target_node.parent.right_node:
+                if target_node.left_node is not None:
+                    target_node.left_node.parent = target_node.parent
+                    target_node.parent.right_node = target_node.left_node
+                else:
+                    target_node.right_node.parent = target_node.parent
+                    target_node.parent.right_node = target_node.right_node
+            else:
+                if target_node.left_node is not None:
+                    target_node.left_node.parent = target_node.parent
+                    target_node.parent.left_node = target_node.left_node
+                else:
+                    target_node.right_node.parent = target_node.parent
+                    target_node.parent.left_node = target_node.right_node
+
+    # def get_successor(self, value):
+    #     smaller_node = self.get_node(value)
+
+    #     if smaller_node is None:
+    #         return Exception("This value is not in the tree")
+
+    #     current_node = smaller_node
+    #     # set current node to the smaller node
+
+    #     while current_node.parent is not None or current_node.right_node is not None:
+    #         if current_node.value < smaller_node.value:
+    #             current_node = current_node.parent
+    #         elif current_node.right_node is not None:
+    #             print("problem")
+    #             return self.get_min(current_node.right_node)
+    #         elif current_node.value > smaller_node.value:
+    #             return current_node.value
+    #         elif current_node.parent is None:
+    #             return None
     #         else:
-    #             target_node_parent.left_node = None
-    #     elif target_node.left_node is not None and target_node.right_node is not None:
-    #         # has both children case
-    #         pass
-    #     else:
-    #         is_smaller = value < target_node_parent.value
+    #             current_node = current_node.parent
+
+    #             # go up to parent until new node is bigger!
+
+    #     if current_node is not smaller_node:
+    #         print("bug here")
+    #         return current_node.value
