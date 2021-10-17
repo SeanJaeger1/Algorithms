@@ -7,7 +7,7 @@ class BinaryMaxHeap:
         self._size = 0
 
     def __repr__(self):
-        return str(self._heap[1:])
+        return str(self._heap[1 : self._size])
 
     def _parent(self, index):
         return math.floor(index / 2)
@@ -17,6 +17,34 @@ class BinaryMaxHeap:
 
     def _right_child(self, index):
         return index * 2 + 1
+
+    def _sift_up(self, index):
+        sift_index = index
+        while (
+            sift_index > 1
+            and self._heap[self._parent(sift_index)] < self._heap[sift_index]
+        ):
+            self._heap[self._parent(sift_index)], self._heap[sift_index] = (
+                self._heap[sift_index],
+                self._heap[self._parent(sift_index)],
+            )
+            sift_index = self._parent(sift_index)
+
+    def _sift_down(self, index):
+        pass
+
+    def remove(self, index):
+        self._heap[index] = math.inf
+        self._sift_up(index)
+        self.extract_max()
+
+    def change_priority(self, index, new_value):
+        old_value = self._heap[index]
+        self._heap[index] = new_value
+        if new_value > old_value:
+            self._sift_up(index)
+        else:
+            self._sift_down(index)
 
     def get_size(self):
         return self._size
@@ -31,17 +59,14 @@ class BinaryMaxHeap:
     def get_max(self):
         return self._heap[1]
 
-    def insert(self, element):
-        pass
+    def extract_max(self):
+        result = self._heap[1]
+        self._heap[1] = self._heap[self._size]
+        self._size = self._size - 1
+        self._sift_down(1)
+        return result
 
-    def sift_up(self, index):
-        sift_index = index
-        while (
-            sift_index > 0
-            and self._heap[self._parent(sift_index)] < self._heap[sift_index]
-        ):
-            self._heap[self._parent(sift_index)], self._heap[sift_index] = (
-                self._heap[sift_index],
-                self._heap[self._parent(sift_index)],
-            )
-            sift_index = self._parent(sift_index)
+    def insert(self, element):
+        self._size = self._size + 1
+        self._heap.append(element)
+        self._sift_up(self._size)
