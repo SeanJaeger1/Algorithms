@@ -212,30 +212,27 @@ class BinarySearchTree:
                     target_node.right_node.parent = target_node.parent
                     target_node.parent.left_node = target_node.right_node
 
-    # def get_successor(self, value):
-    #     smaller_node = self.get_node(value)
+    def get_successor(self, value):
+        # needs a while loop refactor
+        smaller_node = self.get_node(value)
 
-    #     if smaller_node is None:
-    #         return Exception("This value is not in the tree")
+        if smaller_node is None:
+            return Exception("This value is not in the tree")
 
-    #     current_node = smaller_node
-    #     # set current node to the smaller node
+        if smaller_node.right_node is not None:
+            return self.get_min(smaller_node.right_node)
 
-    #     while current_node.parent is not None or current_node.right_node is not None:
-    #         if current_node.value < smaller_node.value:
-    #             current_node = current_node.parent
-    #         elif current_node.right_node is not None:
-    #             print("problem")
-    #             return self.get_min(current_node.right_node)
-    #         elif current_node.value > smaller_node.value:
-    #             return current_node.value
-    #         elif current_node.parent is None:
-    #             return None
-    #         else:
-    #             current_node = current_node.parent
+        current_node = smaller_node
+        # set current node to the smaller node
 
-    #             # go up to parent until new node is bigger!
-
-    #     if current_node is not smaller_node:
-    #         print("bug here")
-    #         return current_node.value
+        while current_node.parent is not None or current_node.right_node is not None:
+            if current_node.value < smaller_node.value:
+                current_node = current_node.parent
+            elif current_node is not smaller_node:
+                return current_node.value
+            elif current_node.value > smaller_node.value:
+                return current_node.value
+            elif current_node.parent is None:
+                return None
+            else:
+                current_node = current_node.parent

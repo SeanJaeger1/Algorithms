@@ -5,7 +5,9 @@ from binary_search_tree import BinarySearchTree
 
 example_tree = BinarySearchTree()
 
-to_insert = [i for i in range(20)]
+number_of_nodes = 100
+
+to_insert = [i for i in range(number_of_nodes)]
 random.shuffle(to_insert)
 
 for value in to_insert:
