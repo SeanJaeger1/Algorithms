@@ -19,3 +19,9 @@ for value in to_insert:
 # print(example_tree.get_height())
 # print(example_tree.is_binary_search_tree())
 print(example_tree)
+
+for i in range(number_of_nodes - 1):
+    if example_tree.get_successor(i) != i + 1:
+        print(example_tree.root_node)
+        print(i)
+        print("PROBLEM")
