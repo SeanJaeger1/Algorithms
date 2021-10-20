@@ -74,6 +74,9 @@ class BinaryMaxHeap:
         return self._heap[1]
 
     def extract_max(self):
+        if self._size == 0:
+            return None
+
         result = self._heap[1]
         self._heap[1] = self._heap[self._size]
         self._size = self._size - 1
@@ -84,3 +87,16 @@ class BinaryMaxHeap:
         self._size = self._size + 1
         self._heap.append(element)
         self._sift_up(self._size)
+
+    def empty_heap(self):
+        self._heap = [None]
+        self._size = 0
+
+    def heap_sort(self, array_to_sort):
+        self.empty_heap()
+        self.heapify(array_to_sort)
+        sorted_array = []
+        while self._size > 0:
+            sorted_array.append(self.extract_max())
+
+        return sorted_array
