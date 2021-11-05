@@ -11,7 +11,7 @@ graph = {
 }
 
 
-def depth_first_search(starting_node, graph):
+def depth_first_search(graph, starting_node):
     queue, discovered = deque([starting_node]), []
 
     while queue:
@@ -27,4 +27,4 @@ def depth_first_search(starting_node, graph):
     return discovered
 
 
-print(depth_first_search("A", graph))
+print(depth_first_search(graph, "A"))
